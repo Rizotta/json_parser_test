@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Index</title>
+	<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="container center">
+	<h1>Тестовое задание</h1>
+	<p>Принять POST запрос, передающий JSON вида {"email": "cogito@ergo.sum"} , где  cogito@ergo.sum - это данные, которые пользователь вводит в форме на frontend. Нужно проверить, есть ли такой email в БД. Если нет -  записать значение в БД (MySQL или любую другую реляционную, которая ближе). При успешной записи вернуть 200, в остальных случаях - вернуть 400. Используемые технологии - на ваш выбор.</p>
+	<form id="form" action="#" method="post">
+		<input type="email" id="email" name="email" value="cogito@ergo.sum">
+		<input type="submit">
+	</form>
+
+	<script type="text/javascript" src="js/jquery-3.5.1.min.js"></script>
+	<script type="text/javascript" src="js/jquery.json-2.6.0.js"></script>
+
+	<script type="text/javascript">					// Для наглядности основной скрипт оставила здесь
+        $(function() {
+            $("#form").submit(function() {
+                let formData = {					// Объект с JSON данными
+                    "email":$("#email").val()
+                };
+                $.ajax({							// Отправка ajax - запроса
+                    url:'action.php',
+					type:'POST',
+                    data: {							// Параметр с json - данными
+                        jsonData: $.toJSON(formData)
+                    },
+					success: function(res) {		// Вывод информации
+                        alert(res);
+                    }
+                });
+                return false;						// Предотвращение отправки формы обычным способом
+            });
+        });
+	</script>
+
+</div>
+</body>
+</html>

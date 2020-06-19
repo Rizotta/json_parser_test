@@ -2,11 +2,6 @@
 
 // Функция подключения к БД
 function connect() {
-	static $db;
-	if ($db ) {
-		return $db;
-	}
-
 	try {
 		$db = new PDO("mysql:host=localhost;dbname=test;charset=UTF8", "user", "password");
 	} catch (PDOException $e) {

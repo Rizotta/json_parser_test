@@ -15,15 +15,14 @@ function connect() {
 function check_user( $email ) {
 
 	$pdo = connect();							// Подключение к базе
-	$stmt = $pdo->prepare( 'SELECT * from users WHERE email = ?' );		// Подготовка запроса
+	$stmt = $pdo->prepare( 'SELECT * from users WHERE email = ?' );		// Подготовка запроса поиска пользователя
 
 	if ( !$stmt->execute([ $email ])) {  					// Что-то пошло не так при выполнении - выдаём 400
-		$ret = '400';
-		echo $ret;
+		echo = 400;
 
 	} elseif ( $stmt->rowCount() === 0 ) {					// Количество записей = 0, значит пользователь не найден. Создадим
 
-		$stmt = $pdo->prepare( 'INSERT INTO users ( email ) VALUES ( ? )' );	// Подготовка запроса
+		$stmt = $pdo->prepare( 'INSERT INTO users ( email ) VALUES ( ? )' );	// Подготовка запроса создания пользователя
 		$stmt->execute([ $email ]);						// Выполнение запроса
 
 		$result =  $stmt->errorCode();						// Проверяем результат последней операции
@@ -34,8 +33,7 @@ function check_user( $email ) {
 		}
 
 	} else {									// Если пользователь уже существует - сообщаем
-		$ret = 'Такой пользователь есть в БД';
-		echo "$ret";
+		echo = 'Такой пользователь есть в БД';
 	}
 }
 
